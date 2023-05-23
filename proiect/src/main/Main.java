@@ -4,7 +4,7 @@ import models. *;
 import services. *;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class Main {
 
         while (true) {
 
-            System.out.println("Alegeti o optiune");
+            System.out.println("Alegeti o optiune:");
             System.out.println("1. Adauga magazin");
             System.out.println("2. Adauga angajat");
             System.out.println("3. Adauga client");
@@ -49,19 +49,18 @@ public class Main {
             switch (option) {
                 case 1:
                     System.out.println("Introduceti numele magazinului");
-                    String name = scanner.next();
+                    Scanner scanner1 = new Scanner(System.in);
+                    String name = scanner1.next();
                     System.out.println("Introduceti adresa magazinului");
-                    String address = scanner.next();
-                    System.out.println("Introduceti id-ul magazinului");
-                    Integer id = scanner.nextInt();
-                    Shop shop = new Shop(name, address, id);
-                    shopService.addShop(id, shop);
+                    Scanner scanner2 = new Scanner(System.in);
+                    String address = scanner2.next();
+                    Shop shop = new Shop(name, address, null);
+                    shopService.addShop(shop);
                     break;
                 case 2:
                     System.out.println("Introduceti numele angajatului");
-                    String name1 = scanner.next();
-                    System.out.println("Introduceti id-ul angajatului");
-                    Integer id1 = scanner.nextInt();
+                    Scanner scanner3 = new Scanner(System.in);
+                    String name1 = scanner3.next();
                     System.out.println("Introduceti cnp-ul angajatului");
                     String cnp1 = scanner.next();
                     System.out.println("Introduceti job-ul angajatului");
@@ -70,49 +69,56 @@ public class Main {
                     Integer salary = scanner.nextInt();
                     System.out.println("Introduceti data angajarii angajatului");
                     String hireDate = scanner.next();
-                    Date date = new Date(hireDate);
-                    Angajat angajat = new Angajat(name1, id1, cnp1, job, salary, date);
-                    angajatService.addAngajat(id1, angajat);
+
+                    java.util.Date sdate = (new java.util.Date(hireDate));
+                    Date date = new Date(sdate.getTime());
+
+                    // converteste stringul in data
+
+                    Angajat angajat = new Angajat(name1, null, cnp1, job, salary, date);
+                    angajatService.addAngajat (angajat);
                     break;
                 case 3:
                     System.out.println("Introduceti numele clientului");
-                    String name2 = scanner.next();
-                    System.out.println("Introduceti id-ul clientului");
-                    Integer id2 = scanner.nextInt();
+                    Scanner scanner4 = new Scanner(System.in);
+                    String name2 = scanner4.next();
                     System.out.println("Introduceti cnp-ul clientului");
                     String cnp2 = scanner.next();
                     System.out.println("Introduceti data cumparaturilor");
                     String purchaseDate = scanner.next();
-                    Date date1 = new Date(purchaseDate);
+                    java.util.Date sdate1 = new java.util.Date(purchaseDate);
+                    Date date1 = new Date(sdate1.getTime());
                     // converteste stringul in data
                     System.out.println("Introduceti suma cumparaturilor");
                     Integer purchaseSum = scanner.nextInt();
-                    Client client = new Client(name2, id2, cnp2, date1, purchaseSum);
-                    clientService.addClient(id2, client);
+                    Client client = new Client(name2, null, cnp2, date1, purchaseSum);
+                    clientService.addClient(client);
                     break;
                 case 4:
                     System.out.println("Introduceti numele produsului");
-                    String name3 = scanner.next();
-                    System.out.println("Introduceti id-ul produsului");
-                    Integer id3 = scanner.nextInt();
+                    Scanner scanner5 = new Scanner(System.in);
+                    String name3 = scanner5.next();
                     System.out.println("Introduceti pretul produsului");
                     Integer price = scanner.nextInt();
                     System.out.println("Introduceti cantitatea produsului");
                     Integer quantity = scanner.nextInt();
                     System.out.println("Introduceti tipul produsului");
                     String type = scanner.next();
-                    if (type == "alimentar") {
+                    if (type.equals("alimentar")) {
                         System.out.println("Introduceti data expirarii");
                         String expirationDate = scanner.next();
-                        Date date2 = new Date(expirationDate);
+                        java.util.Date sdate2 = new java.util.Date(expirationDate);
+                        Date date2 = new Date(sdate2.getTime());
                         System.out.println("Introduceti cantitatea produsului");
                         Integer quantityfood = scanner.nextInt();
                         System.out.println("Introduceti producatorul produsului");
-                        String producer = scanner.next();
+                        Scanner scanner6 = new Scanner(System.in);
+                        String producer = scanner6.next();
                         System.out.println("Introduceti calorile produsului");
                         Integer calories = scanner.nextInt();
                         System.out.println("Introduceti ingredientele produsului");
-                        String ingredients = scanner.next();
+                        Scanner scanner7 = new Scanner(System.in);
+                        String ingredients = scanner7.next();
                         // make a list of ingredients
                         List< String > ingredientsList = new ArrayList < > ();
                         // split the string by comma
@@ -125,111 +131,113 @@ public class Main {
                         Boolean isVegetarian = scanner.nextBoolean();
                         System.out.println("Introduceti daca este Vegan");
                         Boolean isVegan = scanner.nextBoolean();
-                        Food mancare = new Food(name3, id3, price, quantity, date2, producer,quantityfood, calories, ingredientsList, isVegetarian, isVegan );
-                        productService.addProduct(id3, mancare);
-                    } else if (type == "bautura") {
+                        Food mancare = new Food(name3, null, price, quantity, date2, producer,quantityfood, calories, ingredientsList, isVegetarian, isVegan );
+                        productService.addProduct(mancare);
+                    } else if (type.equals( "bautura")) {
                         System.out.println("Introduceti producatorul produsului");
-                        String producer = scanner.next();
+                        Scanner scanner8 = new Scanner(System.in);
+                        String producer = scanner8.next();
                         System.out.println("Introduceti data expirarii");
                         String expirationDate = scanner.next();
-                        Date date3 = new Date(expirationDate);
+                        java.util.Date sdate3 = new java.util.Date(expirationDate);
+                        Date date3 = new Date(sdate3.getTime());
                         System.out.println("Introduceti volumul bauturii");
                         Integer volume = scanner.nextInt();
                         System.out.println("Introduceti daca este alcoolica");
                         Boolean isAlcoholic = scanner.nextBoolean();
-                        Drink bautura = new Drink(name3, id3, price,quantity, producer, date3, volume, isAlcoholic );
-                        productService.addProduct(id3, bautura);
+                        Drink bautura = new Drink(name3, null, price,quantity, producer, date3, volume, isAlcoholic );
+                        productService.addProduct(bautura);
                     }
-                    else if (type == "haina"){
+                    else if (type.equals( "haina")){
                     System.out.println("Introduceti culoarea");
                     String color = scanner.next();
                     System.out.println("Introduceti dimensiunea");
                     String size = scanner.next();
                     System.out.println("Introduceti materialul");
                     String material = scanner.next();
-                    Haina haina = new Haina(name3, id3, price, quantity, color, size, material);
-                    productService.addProduct(id3, haina);
+                    Haina haina = new Haina(name3, null, price, quantity, color, size, material);
+                    productService.addProduct(haina);
                 }
                     break;
                 case 5:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id4 = scanner.nextInt();
-                    Shop magazin1 = shopService.getShop(id4);
-                    clientService.getClientsLastMonth(magazin1.getClients());
+                    shopService.getShop(id4);
+                    clientService.getClientLastMonth();
                     break;
                 case 6:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id5 = scanner.nextInt();
-                    Shop magazin2 = shopService.getShop(id5);
-                    clientService.getMaxPurchaseValue(magazin2.getClients());
+                    shopService.getShop(id5);
+                    clientService.updateClientPurchase();
                     break;
                 case 7:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id6 = scanner.nextInt();
-                    Shop magazin3 = shopService.getShop(id6);
+                    shopService.getShop(id6);
                     break;
                 case 8:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id7 = scanner.nextInt();
-                    Shop magazin4 = shopService.getShop(id7);
-                    magazin4.getProducts();
+                    shopService.getShop(id7);
+                    productService.getProduct();
                     break;
                 case 9:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id8 = scanner.nextInt();
-                    Shop magazin5 = shopService.getShop(id8);
-                    magazin5.getAngajati();
+                    shopService.getShop(id8);
+                    angajatService.getAngajat();
                     break;
                 case 10:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id9 = scanner.nextInt();
-                    Shop magazin6 = shopService.getShop(id9);
-                    magazin6.getClients();
+                    shopService.getShop(id9);
+                    clientService.getClient();
                     break;
                 case 11:
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id10 = scanner.nextInt();
-                    Shop magazin7 = shopService.getShop(id10);
-                    productService.getCalories(magazin7.getProducts());
+                    shopService.getShop(id10);
+                    productService.getCalories();
                     break;
                 case 12:
                     // returneaza toate bauturile alcoolice
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id11 = scanner.nextInt();
-                    Shop magazin8 = shopService.getShop(id11);
-                    productService.getAlcohol(magazin8.getProducts());
+                    shopService.getShop(id11);
+                    productService.getAlcohol();
                     break;
                 case 13:
                     //  sorteaza produsele de tip haina dupa marime
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id12 = scanner.nextInt();
-                    Shop magazin9 = shopService.getShop(id12);
-                    productService.sortBySize(magazin9.getProducts());
+                    shopService.getShop(id12);
+                    productService.sortClothesBySize();
                     break;
                 case 14:
                     // verifica daca un produs de tipul mancare e expirat
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id13 = scanner.nextInt();
-                    Shop magazin10 = shopService.getShop(id13);
-                    productService.isExpired(magazin10.getProducts());
+                    shopService.getShop(id13);
+                    productService.checkExpirationDate();
                     break;
                 case 15:
                     // pentru angajatii cu hiredate cu 5 ani in urma se va actualiza salariul cu 15%
                     shopService.getAllShops();
                     System.out.println("Alege un magazin");
                     Integer id14 = scanner.nextInt();
-                    Shop magazin11 = shopService.getShop(id14);
-                    angajatService.updateAngajat(magazin11.getAngajati());
+                    shopService.getShop(id14);
+                    angajatService.updateAngajatSalary();
 
                 case 16:
                     System.out.println("Ciao ragazzi!");

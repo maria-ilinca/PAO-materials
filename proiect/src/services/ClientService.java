@@ -1,52 +1,30 @@
 package services;
 import models.Client;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
+import repository.ClientRepository;
 
 public class ClientService {
-    // lista clienti
-    private Map<Integer, Client> clients;
-
+    private ClientRepository clients = new ClientRepository();
     // adauga client
-    public void addClient(int id, Client client) {
-       clients.put(id, client);
+    public void addClient(Client client) {
+        clients.addClient(client);
     }
 
     // sterge client
     public void removeClient(int id) {
-        clients.remove(id);
+        clients.removeClient(id);
     }
 
-    public void getClient(int id) {
-        clients.get(id);
+    public void getClient() {
+        clients.getClient();
     }
 
-
-    // calculeaza valoarea maxima a cumparaturilor unor clienti
-    public Integer getMaxPurchaseValue(Map<Integer,Client> clients) {
-        Integer max = 0;
-        for (Map.Entry<Integer, Client> entry : clients.entrySet()) {
-            if (entry.getValue().getPurchaseValue() > max) {
-                max = entry.getValue().getPurchaseValue();
-            }
-        }
-        return max;
+    public void updateClientPurchase() {
+        clients.updateClientPurchase();
     }
 
     // determina numele clientilor care au facut cumparaturi in ultima luna
-    public List<String> getClientsLastMonth(Map <Integer, Client> clients) {
-        List<String> listClienti = new ArrayList<>();
-        // determina luna dintr-o data
-        int month = LocalDate.now().getMonthValue();
-        for (Map.Entry<Integer, Client> entry : clients.entrySet()) {
-            if (entry.getValue().getPurchaseDate().getMonth() == month) {
-                listClienti.add(entry.getValue().getName());
-            }
-        }
-        return listClienti;
+    public void getClientLastMonth() {
+        clients.getClientLastMonth();
     }
 }
