@@ -91,6 +91,18 @@ public class ProductRepository {
         }
     }
 
+    // update product quantity by 10%
+    public void updateProductQuantity() {
+        String sql = "UPDATE product SET quantity = quantity + quantity * 0.1";
+        try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
+            statement.executeUpdate();
+            System.out.println("Cantitatea produselor a fost actualizata cu succes!");
+            auditService.addAction("updateProductQuantity");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     // returneaza toate bauturile alcoolice
     public void getAlcohol() {
         String sql = "SELECT * FROM product WHERE name LIKE 'bautura' AND alcoolic = 1";

@@ -58,8 +58,8 @@ public class ClientRepository {
         String sql = "UPDATE client SET purchaseValue=purchaseValue+100  WHERE id % 2 = 0";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             statement.executeUpdate();
-            System.out.println("Emailurile au fost actualizate cu succes!");
-            auditService.addAction("updateClientEmail");
+            System.out.println("PurchaseValue a fost actualizat cu succes!");
+            auditService.addAction("updateClientPurchaseValue");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());}

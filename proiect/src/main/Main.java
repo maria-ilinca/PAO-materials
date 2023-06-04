@@ -39,7 +39,14 @@ public class Main {
             System.out.println("14. Verifica daca un produs de tipul mancare e expirat");
             // pentru angajatii cu hiredate cu 5 ani in urma se va actualiza salariul cu 15%
             System.out.println("15. Actualizeaza salariul angajatilor");
-            System.out.println("16. Iesire");
+            System.out.println("16. Sterge un produs");
+            System.out.println("17. Sterge un angajat");
+            System.out.println("18. Sterge un client");
+            System.out.println("19. Sterge un magazin");
+            System.out.println("20. Actualizeaza purchasevalue pentru clientii cu id par");
+            System.out.println("21. Actualizeaza cantitatea produselor");
+            System.out.println("22. Actualizeaza adresa magazinelor");
+            System.out.println("23. Iesire");
 
 
 
@@ -188,37 +195,37 @@ public class Main {
                     shopService.getShop(id9);
                     clientService.getClient();
                     break;
-                case 11:
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id10 = scanner.nextInt();
-                    shopService.getShop(id10);
-                    productService.getCalories();
-                    break;
-                case 12:
-                    // returneaza toate bauturile alcoolice
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id11 = scanner.nextInt();
-                    shopService.getShop(id11);
-                    productService.getAlcohol();
-                    break;
-                case 13:
-                    //  sorteaza produsele de tip haina dupa marime
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id12 = scanner.nextInt();
-                    shopService.getShop(id12);
-                    productService.sortClothesBySize();
-                    break;
-                case 14:
-                    // verifica daca un produs de tipul mancare e expirat
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id13 = scanner.nextInt();
-                    shopService.getShop(id13);
-                    productService.checkExpirationDate();
-                    break;
+//                case 11:
+//                    shopService.getAllShops();
+//                    System.out.println("Alege un magazin");
+//                    Integer id10 = scanner.nextInt();
+//                    shopService.getShop(id10);
+//                    productService.getCalories();
+//                    break;
+//                case 12:
+//                    // returneaza toate bauturile alcoolice
+//                    shopService.getAllShops();
+//                    System.out.println("Alege un magazin");
+//                    Integer id11 = scanner.nextInt();
+//                    shopService.getShop(id11);
+//                    productService.getAlcohol();
+//                    break;
+//                case 13:
+//                    //  sorteaza produsele de tip haina dupa marime
+//                    shopService.getAllShops();
+//                    System.out.println("Alege un magazin");
+//                    Integer id12 = scanner.nextInt();
+//                    shopService.getShop(id12);
+//                    productService.sortClothesBySize();
+//                    break;
+//                case 14:
+//                    // verifica daca un produs de tipul mancare e expirat
+//                    shopService.getAllShops();
+//                    System.out.println("Alege un magazin");
+//                    Integer id13 = scanner.nextInt();
+//                    shopService.getShop(id13);
+//                    productService.checkExpirationDate();
+//                    break;
                 case 15:
                     // pentru angajatii cu hiredate cu 5 ani in urma se va actualiza salariul cu 15%
                     shopService.getAllShops();
@@ -226,12 +233,40 @@ public class Main {
                     Integer id14 = scanner.nextInt();
                     shopService.getShop(id14);
                     angajatService.updateAngajatSalary();
-
+                    break;
                 case 16:
+                    System.out.println("Introduceti id-ul produsului");
+                    Integer id15 = scanner.nextInt();
+                    productService.removeProduct(id15);
+                    break;
+                case 17:
+                    System.out.println("Introduceti id-ul clientului");
+                    Integer id16 = scanner.nextInt();
+                    clientService.removeClient(id16);
+                    break;
+                case 18:
+                    System.out.println("Introduceti id-ul angajatului");
+                    Integer id17 = scanner.nextInt();
+                    angajatService.removeAngajat(id17);
+                    break;
+                case 19:
+                    System.out.println("Introduceti id-ul magazinului");
+                    Integer id18 = scanner.nextInt();
+                    shopService.removeShop(id18);
+                    break;
+                case 20:
+                    clientService.updateClientPurchase();
+                    break;
+                case 21:
+                    productService.updateProductQuantity();
+                    break;
+                case 22:
+                    shopService.updateShopAddress();
+                    break;
+                case 23:
                     System.out.println("Ciao ragazzi!");
                     System.exit(0);
-
-
+                    break;
             }
         }
     }

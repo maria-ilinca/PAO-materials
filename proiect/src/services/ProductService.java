@@ -22,6 +22,9 @@ public class ProductService {
         products.getProduct();
     }
 
+    public void updateProductQuantity() {
+        products.updateProductQuantity();
+    }
 
     public void sortClothesBySize() {
         products.sortClothesBySize();
