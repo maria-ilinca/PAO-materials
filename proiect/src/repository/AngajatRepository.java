@@ -14,7 +14,7 @@ public class AngajatRepository {
          try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("nume") + " Prenume: " + result.getString("prenume") + " Salariu: " + result.getInt("salariu") + " Data angajarii: " + result.getDate("data_angajarii"));
+                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("name") + " Salariu: " + result.getInt("salary") + " Data angajarii: " + result.getDate("hireDate"));
             }
             auditService.addAction("getAngajat");
          }
@@ -56,7 +56,7 @@ public class AngajatRepository {
      public void updateAngajatSalary()
         {
             // pentru angajatii cu hiredate cu 5 ani in urma se va actualiza salariul cu 15%
-            String sql = "UPDATE angajat SET salariu = salariu + salariu * 15 / 100 WHERE data_angajarii < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)";
+            String sql = "UPDATE angajat SET salary = salary + salary * 15 / 100 WHERE hireDate < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)";
             try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
                 statement.executeUpdate();
                 System.out.println("Salariile angajatilor au fost actualizate cu succes!");

@@ -29,7 +29,6 @@ public class Main {
             System.out.println("3. Adauga client");
             System.out.println("4. Adauga produs");
             System.out.println("5. Afiseaza clientii care au facut cumparaturi in ultima luna");
-            System.out.println("6. Afiseaza valoarea maxima a cumparaturilor unor clienti");
             System.out.println("7. Afiseaza toate magazinele");
             System.out.println("8. Afiseaza toate produsele dintr-un magazin");
             System.out.println("9. Afiseaza toti angajatii");
@@ -160,18 +159,7 @@ public class Main {
                 }
                     break;
                 case 5:
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id4 = scanner.nextInt();
-                    shopService.getShop(id4);
                     clientService.getClientLastMonth();
-                    break;
-                case 6:
-                    shopService.getAllShops();
-                    System.out.println("Alege un magazin");
-                    Integer id5 = scanner.nextInt();
-                    shopService.getShop(id5);
-                    clientService.updateClientPurchase();
                     break;
                 case 7:
                     shopService.getAllShops();
@@ -242,6 +230,7 @@ public class Main {
                 case 16:
                     System.out.println("Ciao ragazzi!");
                     System.exit(0);
+
 
             }
         }

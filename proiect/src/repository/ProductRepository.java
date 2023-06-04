@@ -14,7 +14,7 @@ public class ProductRepository {
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("nume") + " Pret: " + result.getInt("pret") + " Cantitate: " + result.getInt("cantitate"));
+                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("name") + " Pret: " + result.getInt("price") + " Cantitate: " + result.getInt("quantity"));
             }
             auditService.addAction("getProduct");
         } catch (Exception e) {
@@ -51,12 +51,12 @@ public class ProductRepository {
 
     // verifica daca un produs de tipul mancare e expirat
     public void checkExpirationDate() {
-        String sql = "SELECT * FROM product WHERE nume LIKE 'mancare' AND data_expirare < ?";
+        String sql = "SELECT * FROM product WHERE name LIKE 'mancare' AND data_expirare < ?";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             statement.setDate(1, Date.valueOf("2021-05-01"));
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Produsul " + result.getString("nume") + " cu id-ul " + result.getInt("id") + " este expirat!");
+                System.out.println("Produsul " + result.getString("name") + " cu id-ul " + result.getInt("id") + " este expirat!");
             }
             auditService.addAction("checkExpirationDate");
         } catch (Exception e) {
@@ -65,11 +65,11 @@ public class ProductRepository {
     }
     // sorteaza produsele de tip haina dupa marime
     public void sortClothesBySize() {
-        String sql = "SELECT * FROM product WHERE nume LIKE 'haina' ORDER BY marime";
+        String sql = "SELECT * FROM product WHERE name LIKE 'haina' ORDER BY marime";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Produsul " + result.getString("nume") + " cu id-ul " + result.getInt("id") + " are marimea " + result.getString("marime"));
+                System.out.println("Produsul " + result.getString("name") + " cu id-ul " + result.getInt("id") + " are marimea " + result.getString("marime"));
             }
             auditService.addAction("sortClothesBySize");
         } catch (Exception e) {
@@ -79,11 +79,11 @@ public class ProductRepository {
 
     // returneaza caloriile de la toate produsele de tip mancare
     public void getCalories() {
-        String sql = "SELECT * FROM product WHERE nume LIKE 'mancare'";
+        String sql = "SELECT * FROM product WHERE name LIKE 'mancare'";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Produsul " + result.getString("nume") + " cu id-ul " + result.getInt("id") + " are " + result.getInt("calorii") + " calorii");
+                System.out.println("Produsul " + result.getString("name") + " cu id-ul " + result.getInt("id") + " are " + result.getInt("calorii") + " calorii");
             }
             auditService.addAction("getCalories");
         } catch (Exception e) {
@@ -93,11 +93,11 @@ public class ProductRepository {
 
     // returneaza toate bauturile alcoolice
     public void getAlcohol() {
-        String sql = "SELECT * FROM product WHERE nume LIKE 'bautura' AND alcoolic = 1";
+        String sql = "SELECT * FROM product WHERE name LIKE 'bautura' AND alcoolic = 1";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Produsul " + result.getString("nume") + " cu id-ul " + result.getInt("id") + " este alcoolic");
+                System.out.println("Produsul " + result.getString("name") + " cu id-ul " + result.getInt("id") + " este alcoolic");
             }
             auditService.addAction("getAlcohol");
         } catch (Exception e) {

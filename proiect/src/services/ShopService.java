@@ -7,25 +7,25 @@ import models.Shop;
 import repository.ShopRepository;
 
 public class ShopService {
-   private ShopRepository shops = new ShopRepository();
+   private ShopRepository shopRepository= new ShopRepository();
         public void addShop(Shop shop) {
-            shops.addShop(shop);
+            shopRepository.addShop(shop);
         }
 
         public void removeShop(int id) {
-            shops.removeShop(id);
+            shopRepository.removeShop(id);
         }
 
         public void updateShopAddress() {
-            shops.updateShopAddress();
+            shopRepository.updateShopAddress();
         }
 
         public void getShop(int id) {
-            shops.getShop(id);
+            shopRepository.getShop(id);
         }
 
         public void getAllShops() {
-            shops.getAllShops();
+            shopRepository.getAllShops();
         }
 
 

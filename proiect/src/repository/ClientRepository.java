@@ -14,7 +14,7 @@ public class ClientRepository {
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("nume") + " Prenume: " + result.getString("prenume") + " CNP: " + result.getString("cnp") + " Email: " + result.getString("email") + " Telefon: " + result.getString("telefon"));
+                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("name") + " CNP: " + result.getString("cnp"));
             }
             auditService.addAction("getClient");
         }
@@ -68,11 +68,11 @@ public class ClientRepository {
     // determina numele clientilor care au facut cumparaturi in ultima luna
     public void getClientLastMonth()
     {
-        String sql = "SELECT nume FROM client WHERE purchaseDate > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+        String sql = "SELECT name FROM client WHERE purchaseDate > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Nume: " + result.getString("nume"));
+                System.out.println("Nume: " + result.getString("name"));
             }
             auditService.addAction("getClientLastMonth");
         }

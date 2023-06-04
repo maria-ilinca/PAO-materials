@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
 public class ShopRepository {
     AuditService auditService = new AuditService();
     public void getShop (int id) {
-        String sql = "SELECT * FROM shops";
+        String sql = "SELECT * FROM shop WHERE id = ?";
+
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
+            statement.setInt(1, id);
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("nume") + " Adresa: " + result.getString("adresa"));
+                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("name") + " Adresa: " + result.getString("address"));
             }
             auditService.addAction("getShop");
         } catch (Exception e) {
@@ -50,7 +52,7 @@ public class ShopRepository {
 
     public void updateShopAddress() {
         // pentru magazinele cu adresa care incepe cu litera 'B' se va actualiza adresa cu 'Bucuresti'
-        String sql = "UPDATE shop SET adresa = 'Bucuresti' WHERE adresa LIKE 'B%'";
+        String sql = "UPDATE shop SET address = 'Bucuresti' WHERE address LIKE 'B%'";
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             statement.executeUpdate();
             System.out.println("Adresa magazinelor a fost actualizata cu succes!");
@@ -66,7 +68,7 @@ public class ShopRepository {
         try (PreparedStatement statement = DBConnection.getInstance().prepareStatement(sql)) {
             var result = statement.executeQuery();
             while (result.next()) {
-                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("nume") + " Adresa: " + result.getString("adresa"));
+                System.out.println("Id: " + result.getInt("id") + " Nume: " + result.getString("name") + " Adresa: " + result.getString("address"));
             }
             auditService.addAction("getAllShops");
         } catch (Exception e) {
